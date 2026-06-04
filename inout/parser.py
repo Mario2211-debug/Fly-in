@@ -1,4 +1,3 @@
-from core.drones import Drones
 from utils.fly_types import type_hub, connections
 
 
@@ -61,4 +60,3 @@ def parser(file) -> Conf:
             conf.connections.append(connections(name, options))
 
     return conf
-
