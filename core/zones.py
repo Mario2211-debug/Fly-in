@@ -1,4 +1,4 @@
-from utils.fly_types import zone
+from utils.flyin_types import zone
 
 
 class Zones:

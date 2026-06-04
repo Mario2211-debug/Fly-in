@@ -1,4 +1,4 @@
-from utils.fly_types import type_hub, connections
+from utils.flyin_types import type_hub, connections
 
 
 class Conf:
