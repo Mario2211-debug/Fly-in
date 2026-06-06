@@ -5,8 +5,8 @@ mlx_ptr = mlx.mlx_init()
 _, screen_w, screen_h = mlx.mlx_get_screen_size(mlx_ptr)
 
 
-width, heigth = 19, 21
-CELL = 20
+width, heigth = 12, 11
+CELL = 50
 win_h = CELL * heigth
 win_w = CELL * width
 
