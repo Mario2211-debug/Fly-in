@@ -12,7 +12,7 @@ class type_zone(str, Enum):
 @dataclass
 class connections:
     name: str
-    options: list[dict]
+    options: list[dict, ...]
 
 
 @dataclass

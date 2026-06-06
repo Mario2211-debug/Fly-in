@@ -3,13 +3,25 @@ from core.drones import Drones
 
 
 def app():
-    data = open("./maps/easy/03_basic_capacity.txt", "r")
+    data = open("./maps/hard/01_maze_nightmare.txt", "r")
     config = parser(data)
     drone = Drones("DM")
     drone.create_drones(7)
 
-    for conn in config.connections:
-        print(conn.name)
+    print("Start Hubs: ")
+    print(f"{config.start.name}: {config.start.options}")
     print("\n")
+
+
+    print("Hubs: ")
     for hub in config.hubs:
-        print(hub.name)
+        print(f"{hub.name}: {hub.options}")
+    print("\n")
+
+    print("End Hubs: ")
+    print(f"{config.end.name}: {config.end.options}")
+    print("\n")
+
+    print("Connections: ")
+    for conn in config.connections:
+        print(f"{conn.name}: {conn.options}")

@@ -31,8 +31,16 @@ def parser(file) -> Conf:
             x = parts[1]
             y = parts[2]
             options = parts[3:]
-            print(options[0].strip().split("="))
-            conf.start = type_hub(name, x, y, options)
+
+            options_dict = {}
+            for op in options:
+                op = op.strip("[]")
+                if "=" in op:
+                    key, value = op.split("=")
+                    options_dict[key] = value
+                else:
+                    options_dict[key] = None
+            conf.start = type_hub(name, x, y, options_dict)
 
         elif line.startswith("hub:"):
             _, values = line.split(":")
@@ -41,7 +49,14 @@ def parser(file) -> Conf:
             x = parts[1]
             y = parts[2]
             options = parts[3:]
-            conf.hubs.append(type_hub(name, int(x), int(y), options))
+
+            options_dict = {}
+            for op in options:
+                op = op.strip("[]")
+                if "=" in op:
+                    key, value = op.split("=")
+                    options_dict[key] = value
+            conf.hubs.append(type_hub(name, int(x), int(y), options_dict))
 
         elif line.startswith("end_hub:"):
             _, values = line.split(":")
@@ -50,13 +65,30 @@ def parser(file) -> Conf:
             x = parts[1]
             y = parts[2]
             options = parts[3:]
-            conf.end = type_hub(name, x, y, [options])
+
+            options_dict = {}
+            for op in options:
+                op = op.strip("[]")
+                if "=" in op:
+                    key, value = op.split("=")
+                    options_dict[key] = value
+                else:
+                    options_dict[key] = None
+            conf.end = type_hub(name, x, y, options_dict)
 
         elif line.startswith("connection:"):
             _, values = line.split(":")
             parts = values.strip().split()
             name = parts[0]
             options = parts[1:]
-            conf.connections.append(connections(name, options))
 
+            options_dict = {}
+            for op in options:
+                op = op.strip("[]")
+                if "=" in op:
+                    key, value = op.split("=")
+                    options_dict[key] = value
+                else:
+                    options_dict[key] = None
+            conf.connections.append(connections(name,  options_dict))
     return conf
