@@ -48,14 +48,14 @@ def dijkstra(graph, start, end):
     if end not in pred or (pred[end] is None and end != start):
         return None, float('inf')
 
-    caminho = []
+    path = []
     curr = end
     while curr is not None:
-        caminho.append(curr)
+        path.append(curr)
         curr = pred[curr]
-    caminho.reverse()
+    path.reverse()
 
-    if caminho[0] == start:
-        return caminho, dist[end]
+    if path[0] == start:
+        return path, dist[end]
     else:
         return None, float('inf')
