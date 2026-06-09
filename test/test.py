@@ -164,7 +164,6 @@ def main():
     global last_time
     last_time = time.time()
 
-    # Hooks
     mlx.mlx_key_hook(window, on_key, None)
     # mlx.mlx_key_release_hook(window, on_key_release, None)  # Importante!
     mlx.mlx_hook(window, 33, 0, on_close, None)
@@ -177,7 +176,6 @@ def main():
 
     mlx.mlx_loop(mlx_ptr)
 
-    # Limpeza
     mlx.mlx_destroy_image(mlx_ptr, img)
     mlx.mlx_destroy_window(mlx_ptr, window)
     mlx.mlx_release(mlx_ptr)

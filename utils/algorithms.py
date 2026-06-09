@@ -21,7 +21,7 @@ def dfs(graph: dict, start: tuple, end: None) -> None:
     return None
 
 
-def dijkstra(graph, start, end):
+def dijkstra(graph, start, end, conf=None):
 
     dist = {no: float('inf') for no in graph}
     dist[start] = 0
@@ -38,7 +38,14 @@ def dijkstra(graph, start, end):
             break
 
         for neighbor in graph[curr]:
-            new_dist = curr_dist + 1
+            # custo de entrar no nó vizinho
+            if conf:
+                hub = conf.get_hub_by_coords(*neighbor)
+                cost = hub.movement_cost if hub else 1
+            else:
+                cost = 1
+
+            new_dist = curr_dist + cost
 
             if new_dist < dist[neighbor]:
                 dist[neighbor] = new_dist

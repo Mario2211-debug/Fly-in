@@ -1,38 +1,22 @@
 from inout.parser import parser
 from core.drones import Drones
-from core.build_graph import build_graph
-from utils.matrix import matrix
 from utils.algorithms import dijkstra
+from utils.render import Renderer
 
 
 def app():
-    file = open("./maps/hard/01_maze_nightmare.txt", "r")
+    file = open("./maps/challenger/01_the_impossible_dream.txt", "r")
     config = parser(file)
-    graph = build_graph(matrix)
-    drone = Drones("DM")
-    drone.create_drones(7)
+    graph = config.build_graph()
 
-    for data in graph:
-        print(f"{data}: {graph[data]}\n")
 
-    print("Start Hubs: ")
-    print(f"{config.start.name}: {config.start.options}")
-    print("\n")
-    print("Hubs: ")
-    for hub in config.hubs:
-        print(f"{hub.name}: {hub.options}")
-    print("\n")
+# inicializa mlx, cria janela e imagem com win_w, win_h
+# ...
 
-    print("End Hubs: ")
-    print(f"{config.end.name}: {config.end.options}")
-    print("\n")
-
-    print("Connections: ")
-    for conn in config.connections:
-        print(f"{conn.name}: {conn.options}")
-
-    # print(graph.keys())
-    print("DFS a partir do vértice 0:")
-
-    caminho, custo = dijkstra(graph, (1, 1), (18, 7))
-    print(f"Menor caminho: {caminho} com custo {custo}")
+    caminho, custo = dijkstra(graph, (config.start.x, config.start.y),
+                              (config.end.x, config.end.y), config)
+    print(f"Melhor caminho: {caminho} com custo {custo}")
+    drones = Drones(config.n_drones, caminho, config)
+    drones.run()
+    renderer = Renderer(config)
+    renderer.run()
